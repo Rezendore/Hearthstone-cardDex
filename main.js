@@ -10,9 +10,9 @@ function Main()
 	$("#version").text("v" + version);
 		
 	$("#active").append(	// where active is setup
-		'<input type="text" id="filterText" onClick="this.select();" value="Tinyfin" label="search filter by text in a card">' +
+		'<input type="text" id="filterText" onClick="this.select();" value="" label="search filter by text in a card">' +
 		'<button id="filterButton">Filter</button></br>' +
-		'<div id="selectedCard" style="height:360px; float:left;"></div>' +
+		'<div id="selectedCard" style="width:25%; float:left;"></div>' +
 		'<div id="filteredCards"></div>'
 	);
 	
@@ -42,6 +42,7 @@ function cardsByName(sort)
 		$("footer").append("Started cardsByName function.</br>");
 	
 	$("#filteredCards").empty();
+	
 	$.ajax(
 	{	// where the base url is set
 		url: "https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/" + sort,
@@ -52,31 +53,42 @@ function cardsByName(sort)
 	})
 	.done(function(data)
 	{
-		var img;
+		
 		for(i=0, l=data.length; i<l; i++)
 		{
-			if(golden) {
-				$("#filteredCards").append(
-					'<img src="' + data[i].imgGold
-					+ '" id="' + data[i].cardId 
-					+ '" alt="">');
-				img=data[i].imgGold;
-			} else {
-				$("#filteredCards").append(
-					'<img src="' + data[i].img 
-					+ '" id="' + data[i].cardId 
-					+ '" alt="">');
-				img=data[i].img;
-			}
-			
-			$("#"+data[i].cardId.toString()).hover(function(data)
+			var img=data[i].img;
+			var type=data[i].type.toString();
+			var cardSet=data[i].cardSet.toString();
+			var flavor=data[i].flavor;
+				// Before display requirements 
+			if(flavor==(undefined))
 			{
-				$("#selectedCard").empty();
-				$("#selectedCard").append(
-					'<img src="' + this.src
-					+ '" style="height:360px'
-					+ '" alt="">');
-			});
+			} else {
+				if(golden) {
+					$("#filteredCards").append(
+						'<li id="' + i
+						+ '"> <img src="' + data[i].imgGold
+						+ '" id="' + data[i].cardId 
+						+ '" alt=""></li>');
+					img=data[i].imgGold;
+				} else {
+					$("#filteredCards").append(
+						'<li id="' + i
+						+ '"> <img src="' + data[i].img 
+						+ '" id="' + data[i].cardId 
+						+ '" alt=""></li');
+					img=data[i].img;
+				}
+				
+				$("#"+data[i].cardId.toString()).hover(function(data)
+				{
+					$("#selectedCard").empty();
+					$("#selectedCard").append(
+						'<img src="' + this.src
+						+ '" style="width:100%; height:100%'
+						+ '" alt="">');
+				});
+			}
 		}
 	});
 	

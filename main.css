@@ -6,7 +6,26 @@ body
 	background-color:black;
 }
 
+li
+{
+	display:inline-block;
+	list-style-type:none;
+	height:15%;
+	width:12.5%;
+}
+
 img
 {
-	height:180px;
+	height:100%;
+	width:100%;
+}
+
+header
+{
+	display:inline-block;
+}
+
+footer
+{
+	display:inline-block;
 }
