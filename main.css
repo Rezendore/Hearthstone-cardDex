@@ -12,6 +12,15 @@ li
 	list-style-type:none;
 	height:15%;
 	width:12.5%;
+	min-width:60px;
+	min-height:80px
+}
+
+button
+{
+	border: none;
+	color:white;
+	background-color:black;
 }
 
 img
@@ -22,10 +31,23 @@ img
 
 header
 {
+	color:red;
 	display:inline-block;
 }
 
 footer
 {
 	display:inline-block;
+}
+
+
+#filterText
+{
+	width:22%;
+	min-width:76px;
+}
+#filters
+{
+	width:25%;
+	min-width:120px;
 }
